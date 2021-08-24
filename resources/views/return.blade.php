@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
-<body style="background-color:#D8D8D8">
-    <h1 style="color:#663399;align-items:center;display:flex;justify-content:center;font-family: 'Roboto', sans-serif;margin-top:10rem;font-size:3rem;">Desafio - BackEnd</h1>
+<body style="background-color:#D8D8D8;font-family: 'Roboto', sans-serif;">
+    <h1 style="color:#663399;align-items:center;display:flex;justify-content:center;margin-top:10rem;font-size:3rem;">Desafio - BackEnd</h1>
     <div style="  margin: auto;
   width: 50%;
   background-color: #E6E6FA;

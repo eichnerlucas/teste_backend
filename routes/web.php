@@ -17,7 +17,7 @@ header('Content-type: application/json; charset=UTF-8');
 */
 
 $router->get('/', function () use ($router) {
-    return view('index');
+    return view('return', ['json' => 'Hello World']);
 });
 
 $router->group(['prefix' => 'source'], function () use ($router) {
