@@ -141,10 +141,12 @@ class ApiController extends Controller
             $post->whistleblower_birth = $request->whistleblower_birth;
         }
         $post->save();
+        $post->id;
         $array = array(
             "status" => "Y",
             "msg" => "POST inserido com sucesso!"
         );
+        //echo "<script>setTimeout(function(){ window.location.href = `https://localhost/sources/registros/$post->id`; }, 3000);</script>";
         return json_encode($array, JSON_PRETTY_PRINT);
     }
 
