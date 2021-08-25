@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Registros;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 
@@ -112,7 +113,6 @@ class ApiController extends Controller
 
     public function post(Request $request){
         $valor = $request->all();
-        var_dump($valor);
         $validator = \Validator::make($valor, [
             'type' => ['required', 'string', Rule::in(['duvida', 'sugestao','denuncia']),],
             'message' => 'required|string',
@@ -134,10 +134,10 @@ class ApiController extends Controller
         $post->is_identified = $request->is_identified;
         $post->deleted = $request->deleted;
         $post->created_at = $today;
-        if(isset($request->whistleblower_name)) {
+        if(isset($request->whistleblower_name) && !empty($request->whistleblower_name)) {
             $post->whistleblower_name = $request->whistleblower_name;
         }
-        if(isset($request->whistleblower_birth)) {
+        if(isset($request->whistleblower_birth) && !empty($request->whistleblower_name)) {
             $post->whistleblower_birth = $request->whistleblower_birth;
         }
         $post->save();
@@ -146,7 +146,7 @@ class ApiController extends Controller
             "status" => "Y",
             "msg" => "POST inserido com sucesso!"
         );
-        //echo "<script>setTimeout(function(){ window.location.href = `https://localhost/sources/registros/$post->id`; }, 3000);</script>";
+        //echo "<script>setTimeout(function(){ window.location.href = `https://localhost:8000/sources/registros/$post->id`; }, 3000);</script>";
         return json_encode($array, JSON_PRETTY_PRINT);
     }
 
@@ -183,8 +183,22 @@ class ApiController extends Controller
             if ($validator->fails()) {
                 return $validator->errors();
             }
+
+            $data = array(
+                'type' => $request->type,
+                'message' => $request->message,
+                'is_identified' => $request->is_identified,
+                'deleted' => $request->deleted,
+            );
+            if(isset($request->whistleblower_name) && !empty($request->whistleblower_name)) {
+                $data = Arr::add($data, 'whistleblower_name' , $request->whistleblower_name);
+            }
+            if(isset($request->whistleblower_birth) && !empty($request->whistleblower_name)) {
+                $data = Arr::add($data, 'whistleblower_birth' , $request->whistleblower_name);
+            }
+            var_dump($data);
             try {
-                Registros::where('id', $id)->update($request->all());
+                Registros::where('id', $id)->update($data);
                 $response = array(
                     "status" => "Y",
                     "msg" => "Campos atualizados!"

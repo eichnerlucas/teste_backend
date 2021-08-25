@@ -13,6 +13,7 @@ class ExampleTest extends TestCase
     public function testExample()
     {
         $this->get('/');
+        echo "teste";
 
         $this->assertEquals(
             $this->app->version(), $this->response->getContent()
