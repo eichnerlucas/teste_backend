@@ -193,10 +193,9 @@ class ApiController extends Controller
             if(isset($request->whistleblower_name) && !empty($request->whistleblower_name)) {
                 $data = Arr::add($data, 'whistleblower_name' , $request->whistleblower_name);
             }
-            if(isset($request->whistleblower_birth) && !empty($request->whistleblower_name)) {
-                $data = Arr::add($data, 'whistleblower_birth' , $request->whistleblower_name);
+            if(isset($request->whistleblower_birth) && !empty($request->whistleblower_birth)) {
+                $data = Arr::add($data, 'whistleblower_birth' , $request->whistleblower_birth);
             }
-            var_dump($data);
             try {
                 Registros::where('id', $id)->update($data);
                 $response = array(
